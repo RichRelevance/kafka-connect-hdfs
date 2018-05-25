@@ -312,6 +312,9 @@ public class TopicPartitionWriter {
 
   @SuppressWarnings("fallthrough")
   public void write() {
+    if (!buffer.isEmpty()) {
+      log.trace("write called with {} records on buffer", buffer.size());
+    }
     long now = time.milliseconds();
     SinkRecord currentRecord = null;
     if (failureTime > 0 && now - failureTime < timeoutMs) {
@@ -411,8 +414,8 @@ public class TopicPartitionWriter {
       // records available
       if (recordCounter > 0 && shouldRotateAndMaybeUpdateTimers(currentRecord, now)) {
         log.info(
-            "committing files after waiting for rotateIntervalMs time but less than flush.size "
-                + "records available."
+            "committing files after waiting for {}ms but {} records available less than flush.size "
+                + "{}.", rotateIntervalMs, recordCounter, flushSize
         );
         updateRotationTimers(currentRecord);
 

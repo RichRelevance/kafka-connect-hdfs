@@ -67,6 +67,7 @@ public class AvroRecordWriterProvider
                 .create(path);
             org.apache.avro.Schema avroSchema = avroData.fromConnectSchema(schema);
             writer.setCodec(CodecFactory.fromString(conf.getAvroCodec()));
+            log.trace("Avro Schema: {}", avroSchema);
             writer.create(avroSchema, out);
           } catch (IOException e) {
             throw new ConnectException(e);
