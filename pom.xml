@@ -29,6 +29,7 @@
     <artifactId>kafka-connect-hdfs</artifactId>
     <packaging>jar</packaging>
     <name>kafka-connect-hdfs</name>
+    <version>4.1.0-rr1</version>
     <organization>
         <name>Confluent, Inc.</name>
         <url>http://confluent.io</url>
